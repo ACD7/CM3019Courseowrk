@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CM3019Courseowrk</string>
+    <string name="action_settings">Settings</string>
+    <string name="no_results">
+        No results - check URL; check RSS xml is well-formed; maybe still loading feed
+    </string>
+    <string name="search">Search</string>
+    <string name="title_activity_news_details">NewsDetails</string>
+</resources>
