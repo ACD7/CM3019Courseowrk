@@ -1,5 +1,7 @@
 package andrewduncan1200974.cm3019courseowrk;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -44,19 +46,26 @@ public class PreferencesActivity extends AppCompatActivity {
         mFeedChannels = getFeedChannels();
 
         mFeedsLv = (ListView)findViewById(R.id.feeds_lv);
-        mFeedsLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        mFeedsLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder adb = new AlertDialog.Builder(PreferencesActivity.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete " + mFeedChannels.get(position).getmDescription());
+                final FeedChannel item = mFeedChannels.remove(position);
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mSharedPreferencesEditor.remove(item.getmUrl());
 
-                FeedChannel item = mFeedChannels.remove(position);
-                //We remove the item from the shared preferences
-                mSharedPreferencesEditor.remove(item.getmUrl());
+                        mAdapter.notifyDataSetChanged();
 
-                mAdapter.notifyDataSetChanged();
+                        setResult(RESULT_OK);
+                    }
 
-                setResult(RESULT_OK);
-
-                return true;
+                });
+                adb.show();
             }
         });
         mAdapter = new ArrayAdapter<FeedChannel>(this, android.R.layout.simple_list_item_1, android.R.id.text1, mFeedChannels);
