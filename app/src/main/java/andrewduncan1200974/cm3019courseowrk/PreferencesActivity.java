@@ -46,7 +46,7 @@ public class PreferencesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_preferences);
         //Get shared preferences object
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //Object to allow me to edit sharedPrefs
+        //Object to allow me to edit sharedPreferences
         mSharedPreferencesEditor = mSharedPreferences.edit();
 
         //Get List of user input from the preferences page
