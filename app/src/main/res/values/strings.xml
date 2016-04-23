@@ -11,7 +11,7 @@
     <string name="feed_description_et">Enter the feed description...</string>
     <string name="add_channel">Add Feed</string>
     <string name="empty_url_error">The url cannot be empty</string>
-    <string name="limit_reached_error">You can only have 10 feed channels at a time</string>
+    <string name="limit_reached_error">You can only have 10 feeds at a time</string>
     <string name="filter_hint">Filter the feed</string>
     <string name="empty_description_error">Please add a description</string>
 </resources>
