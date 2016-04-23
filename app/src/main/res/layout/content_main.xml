@@ -32,4 +32,15 @@
         android:background="#ffffff"
         android:cacheColorHint="#00000000"/>
 
+    <!--  if list is empty -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_results"
+        android:layout_below="@+id/filter_query_et"
+        android:textSize="20sp"
+        android:layout_alignParentStart="true">
+    </TextView>
+
 </RelativeLayout>

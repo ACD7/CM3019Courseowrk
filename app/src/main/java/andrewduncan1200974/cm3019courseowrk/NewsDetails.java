@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebView;
 
+//This class allows the user to click on a item in the ListView and load the full article.
 public class NewsDetails extends AppCompatActivity {
 WebView webView;
     @Override

@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">RSS Reader</string>
+    <string name="action_home">Home</string>
     <string name="action_settings">Settings</string>
     <string name="no_results">
-        No results - check URL; check RSS xml is well-formed; maybe still loading feed
+        No results - Add a feed, Check URL or make sure URL has http:// before it!
     </string>
     <string name="search">Search</string>
     <string name="title_activity_news_details">NewsDetails</string>
@@ -12,4 +13,5 @@
     <string name="empty_url_error">The url cannot be empty</string>
     <string name="limit_reached_error">You can only have 10 feed channels at a time</string>
     <string name="filter_hint">Filter the feed</string>
+    <string name="empty_description_error">Please add a description</string>
 </resources>

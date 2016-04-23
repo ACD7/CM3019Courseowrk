@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Get search bar object
         filterEt = (EditText)findViewById(R.id.filter_query_et);
         filterEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+            //Update MyAdapter when a search query is inserted, this will refresh the List of feedItems
             @Override
             public void afterTextChanged(Editable s) {
                 MyAdapter adapter = (MyAdapter) listView.getAdapter();
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         listView = (ListView) findViewById(R.id.list_view);
+        //If No feeds exist, show the error string.
+        TextView emptyText = (TextView)findViewById(R.id.textView);
+        listView.setEmptyView(emptyText);
         ReadRss readRss = new ReadRss(this, listView);
         readRss.execute();
     }
@@ -65,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //Change activity to the Preference activity or home activity when clicked from the dropdown menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -72,9 +79,14 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, PreferencesActivity.class);
+            startActivityForResult(intent, REQ_MODIFY_FEEDS);
+            return true;
+        }
+
+        if (id == R.id.action_home) {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivityForResult(intent, REQ_MODIFY_FEEDS);
             return true;
         }

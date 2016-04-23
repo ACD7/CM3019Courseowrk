@@ -37,15 +37,18 @@ public class MyAdapter extends ArrayAdapter<FeedItem> implements Filterable{
     }
 
     @Override
+    //get the position of a feed depending on which list is being used.
     public FeedItem getItem(int position) {
         return filterResults != null ? filterResults.get(position) : list.get(position);
     }
 
     @Override
+    //if filterResults != null get filterResults size else get list.size(all feeds)
     public int getCount() {
         return filterResults != null ? filterResults.size() : list.size();
     }
 
+    //Set the xml information into the custom_row_news_item
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
@@ -61,6 +64,7 @@ public class MyAdapter extends ArrayAdapter<FeedItem> implements Filterable{
         } else {
             view = convertView;
         }
+        //setting happens here
         ViewHolder holder = (ViewHolder) view.getTag();
         FeedItem item = getItem(position);
         holder.title.setText(item.getTitle());
@@ -69,6 +73,7 @@ public class MyAdapter extends ArrayAdapter<FeedItem> implements Filterable{
         return view;
     }
 
+    //Filter the feeds based on the search term.
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -77,6 +82,8 @@ public class MyAdapter extends ArrayAdapter<FeedItem> implements Filterable{
                 FilterResults filterResults = new FilterResults();
                 List<FeedItem> filteredItems = new ArrayList<>();
                 constraint = constraint.toString().toLowerCase();
+                /**Loop through all feedItems, call containsKeyword method to check if word is contained in description
+                   If a match os found, add feedItem to filteredItems ArrayList**/
                 if (constraint.length() > 0) {
                     for (int i = 0; i < list.size(); i++) {
                         if (list.get(i).containsKeyword(constraint.toString())) {
@@ -89,10 +96,11 @@ public class MyAdapter extends ArrayAdapter<FeedItem> implements Filterable{
                 return filterResults;
             }
 
+            //Update the feed with new filtered results
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 filterResults = (List<FeedItem>)results.values;
-                //We have no filter
+                //If no search term is entered, display everything
                 if (constraint.length() == 0) {
                     filterResults = null;
                 }

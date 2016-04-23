@@ -1,12 +1,17 @@
 package andrewduncan1200974.cm3019courseowrk;
 
 /**
- * Created by Andrew on 22/04/2016.
+ * The FeedItem class stores the information from the xml, into a FeedItem Object
+ * Created by Andrew Duncan on 22/04/2016.
  */
 public class FeedItem {
+    //Title of feedItem
     String title;
+    //URL to article
     String link;
+    //Small Description of article
     String description;
+    //publication date of article
     String pubDate;
 
     public String getTitle() {
@@ -41,6 +46,7 @@ public class FeedItem {
         this.pubDate = pubDate;
     }
 
+    //Check if search term is contained in itemDescription
     public boolean containsKeyword(String keyword) {
         return description.toString().toLowerCase().contains(keyword) || title.toLowerCase().contains(keyword);
     }
