@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/feed_url_et"
+        android:hint="@string/feed_url"
+        android:layout_width="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/feed_description_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:hint="@string/feed_description_et"/>
+
+    <Button
+        android:text="@string/add_channel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onAddChannelClick"/>
+
+    <ListView
+        android:id="@+id/feeds_lv"
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.renderscript.Element;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +28,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,7 +41,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class ReadRss extends AsyncTask<Void, Void, Void> {
     Activity context;
     private ArrayAdapter<FeedItem> mAdapter;
-    String[] addresses = {"http://feeds.bbci.co.uk/news/world/rss.xml"};//, "http://feeds.skynews.com/feeds/rss/uk.xml"};
+    //String[] addresses = {"http://feeds.bbci.co.uk/news/world/rss.xml"/*};*/, "http://www.channel4.com/news/uk/rss"};
+    List<String> addresses;
     ProgressDialog progressDialog;
     URL url;
     ArrayList<FeedItem> feedItems;
@@ -50,6 +54,12 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
     private LoaderManager mLoaderManager;
 
     public ReadRss(Activity context, ListView listView){
+        Map<String, ?> allKeyValues = PreferenceManager.getDefaultSharedPreferences(context).getAll();
+        Iterator<String> urlsIterator = allKeyValues.keySet().iterator();
+        addresses = new ArrayList<>();
+        while (urlsIterator.hasNext())
+            addresses.add(urlsIterator.next());
+
         this.listView=listView;
         this.context = context;
         progressDialog = new ProgressDialog(context);
@@ -77,6 +87,7 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
     }
     @Override
     protected Void doInBackground(Void... params) {
+        feedItems = new ArrayList<>();
         for (Document url: GetData()) {
             ProcessXml(url);
         }
@@ -85,7 +96,7 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
 
     private void ProcessXml(Document data) {
         if(data!=null) {
-            feedItems = new ArrayList<>();
+
            org.w3c.dom.Element root=data.getDocumentElement();
             Node channel = root.getChildNodes().item(1);
             NodeList items=channel.getChildNodes();
@@ -118,9 +129,9 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
 
     public ArrayList<Document> GetData(){
         ArrayList<Document> urls = new ArrayList<>();
-        for(int i = 0; i < addresses.length; i++){
+        for(int i = 0; i < addresses.size(); i++){
             try {
-                url = new URL(addresses[i]);
+                url = new URL(addresses.get(i));
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 InputStream inputStream = connection.getInputStream();

@@ -13,10 +13,19 @@
     tools:context="cm3019.lab09.ex01.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <EditText
+        android:id="@+id/filter_query_et"
+        android:maxLines="1"
+        android:hint="@string/filter_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/filter_query_et"
         android:divider="#bababa"
         android:dividerHeight="1dp"
         android:listSelector="#00000000"

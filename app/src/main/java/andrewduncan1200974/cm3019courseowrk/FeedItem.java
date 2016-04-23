@@ -41,5 +41,8 @@ public class FeedItem {
         this.pubDate = pubDate;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return description.toString().toLowerCase().contains(keyword) || title.toLowerCase().contains(keyword);
+    }
 }
 
