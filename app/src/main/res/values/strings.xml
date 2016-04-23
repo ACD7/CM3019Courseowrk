@@ -9,7 +9,7 @@
     <string name="title_activity_news_details">NewsDetails</string>
     <string name="feed_url">Enter the feed url...</string>
     <string name="feed_description_et">Enter the feed description...</string>
-    <string name="add_channel">Add Channel</string>
+    <string name="add_channel">Add Feed</string>
     <string name="empty_url_error">The url cannot be empty</string>
     <string name="limit_reached_error">You can only have 10 feed channels at a time</string>
     <string name="filter_hint">Filter the feed</string>
